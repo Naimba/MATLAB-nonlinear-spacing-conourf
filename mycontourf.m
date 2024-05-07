@@ -8,6 +8,7 @@ function [M,c,Z1] = mycontourf(X,Y,Z,levels,cm,mode)
 % levels：单调递增值的向量，以在某些特定高度绘制等高线并填色；
 % cm：填色的colormap
 % mode：可选项，'m'为用m_map的m_contourf，'M'为MATLAB自带的contourf，默认为'm'
+%
 % -----------------------输出变量说明----------------------- 
 % M：等高线矩阵；
 % c：等高线对象，显示等高线图后，使用c设置属性。
