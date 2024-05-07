@@ -31,13 +31,13 @@ end
 n = length(levels);
 Z1 = zeros(size(Z));
 
-% % 线性插值
-% Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
-%     Z(Z>levels(1) & Z<=levels(n)),'linear');
+% 线性插值
+Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
+    Z(Z>levels(1) & Z<=levels(n)),'linear');
 
 % 样条插值
-Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
-    Z(Z>levels(1) & Z<=levels(n)),'spline');
+% Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
+%     Z(Z>levels(1) & Z<=levels(n)),'spline');
 
 % 设置边界值
 Z1(Z<=levels(1)) = 1;
