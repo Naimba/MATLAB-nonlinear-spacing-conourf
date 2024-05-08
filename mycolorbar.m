@@ -56,11 +56,11 @@ end
 
 colormap(color);clim([1 len_tick])
 if isequal(mode,'h')% 水平
-    axis([0 m 0 1])
+    axis([0 m 0 1]);hold on
     line([0 1],[0 0],'linewidth',2,'color','w','parent',cax)
     line([m-1 m],[0 0],'linewidth',2,'color','w','parent',cax)
 else
-    axis([0 1 0 m])
+    axis([0 1 0 m]);hold on
     line([1 1],[0 1],'linewidth',2,'color','w','parent',cax)
     line([1 1],[m-1 m],'linewidth',2,'color','w','parent',cax)
 end
@@ -74,7 +74,7 @@ pat_col1=[cdata(2:end-1)]';
 if isequal(mode,'v')
     pat_v1 = flip(pat_v1,2);
 end
-patch('Faces',pat_f1,'Vertices',pat_v1,'FaceVertexCData',pat_col1,'FaceColor','flat');
+patch('Faces',pat_f1,'Vertices',pat_v1,'FaceVertexCData',pat_col1,'FaceColor','flat','Edgecolor','none');
 %--------------------------------------------------
 if isequal(vnumber,'all') || isequal(vnumber,'<>')
     pat_v2=[0.5 0.5;1 0;1 1;m-1 1;m-1 0;m-0.5 0.5];
@@ -83,14 +83,16 @@ if isequal(vnumber,'all') || isequal(vnumber,'<>')
     if isequal(mode,'v')
         pat_v2 = flip(pat_v2,2);
     end
-    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat');
-    %---------------------------------------------------------
+    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat','Edgecolor','none');
+    %----------------------FFF-----------------------------------
     if isequal(mode,'h')
         set(cax,'color','none','xcolor','k','ycolor','none');
         set(cax,'xtick',1:m-1,'xticklabel',num2cell(tick(2:end-1)),'ytick',[])
+        plot([0.5 1 m-1 m-0.5 m-1 1 0.5],[0.5 0 0 0.5 1 1 0.5],'linewidth',1,'Color','k')
     else
         set(cax,'color','none','ycolor','k','xcolor','none');
         set(cax,'ytick',1:m-1,'yticklabel',num2cell(tick(2:end-1)),'xtick',[])
+        plot([0.5 0 0 0.5 1 1 0.5],[0.5 1 m-1 m-0.5 m-1 1 0.5],'linewidth',1,'Color','k')
     end
 elseif isequal(vnumber,'none') || isequal(vnumber,'==')
     pat_v2=[0 0;1 0;1 1;0 1;m-1 1;m-1 0;m 0;m 1];
@@ -99,14 +101,16 @@ elseif isequal(vnumber,'none') || isequal(vnumber,'==')
     if isequal(mode,'v')
         pat_v2 = flip(pat_v2,2);
     end
-    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat');
+    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat','Edgecolor','none');
     %---------------------------------------------------------
     if isequal(mode,'h')
         set(cax,'color','none','xcolor','k','ycolor','none');
         set(cax,'xtick',0:m,'xticklabel',num2cell(tick),'ytick',[])
+        plot([0 m m 0 0],[0 0 1 1 0],'linewidth',1,'Color','k')
     else
         set(cax,'color','none','ycolor','k','xcolor','none');
         set(cax,'ytick',0:m,'yticklabel',num2cell(tick),'xtick',[])
+        plot([0 0 1 1 0],[0 m m 0 0],'linewidth',1,'Color','k')
     end
 elseif isequal(vnumber,'lower') || isequal(vnumber,'<=')
     pat_v2=[0.5 0.5;1 0;1 1];
@@ -115,7 +119,7 @@ elseif isequal(vnumber,'lower') || isequal(vnumber,'<=')
     if isequal(mode,'v')
         pat_v2 = flip(pat_v2,2);
     end
-    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat');
+    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat','Edgecolor','none');
     %---------------------------------------------------------
     pat_v3 = [m-1 1;m-1 0;m 0;m 1];
     pat_f3 = [1 2 3 4];
@@ -123,13 +127,15 @@ elseif isequal(vnumber,'lower') || isequal(vnumber,'<=')
     if isequal(mode,'v')
         pat_v3 = flip(pat_v3,2);
     end
-    patch('Faces',pat_f3,'Vertices',pat_v3,'FaceVertexCData',pat_col3,'FaceColor','flat');
+    patch('Faces',pat_f3,'Vertices',pat_v3,'FaceVertexCData',pat_col3,'FaceColor','flat','Edgecolor','none');
     if isequal(mode,'h')
         set(cax,'color','none','xcolor','k','ycolor','none');
         set(cax,'xtick',1:m,'xticklabel',num2cell(tick(2:end)),'ytick',[])
+        plot([0.5 1 m m 1 0.5],[0.5 0 0  1 1 0.5],'linewidth',1,'Color','k')
     else
         set(cax,'color','none','ycolor','k','xcolor','none');
         set(cax,'ytick',1:m,'yticklabel',num2cell(tick(2:end)),'xtick',[])
+        plot([0.5 0 0  1 1 0.5],[0.5 1 m m 1 0.5],'linewidth',1,'Color','k')
     end
 elseif isequal(vnumber,'upper') || isequal(vnumber,'=>')
     pat_v2=[m-1 1;m-1 0;m-0.5 0.5];
@@ -138,7 +144,7 @@ elseif isequal(vnumber,'upper') || isequal(vnumber,'=>')
     if isequal(mode,'v')
         pat_v2 = flip(pat_v2,2);
     end
-    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat');
+    patch('Faces',pat_f2,'Vertices',pat_v2,'FaceVertexCData',pat_col2,'FaceColor','flat','Edgecolor','none');
     %---------------------------------------------------------
     pat_v3 = [0 0;1 0;1 1;0 1];
     pat_f3 = [1 2 3 4];
@@ -146,14 +152,16 @@ elseif isequal(vnumber,'upper') || isequal(vnumber,'=>')
     if isequal(mode,'v')
         pat_v3 = flip(pat_v3,2);
     end
-    patch('Faces',pat_f3,'Vertices',pat_v3,'FaceVertexCData',pat_col3,'FaceColor','flat');
+    patch('Faces',pat_f3,'Vertices',pat_v3,'FaceVertexCData',pat_col3,'FaceColor','flat','Edgecolor','none');
     if isequal(mode,'h')
         set(cax,'color','none','xcolor','k','ycolor','none');
         set(cax,'xtick',0:m-1,'xticklabel',num2cell(tick(1:end-1)),'ytick',[])
+        plot([0 m-1 m-0.5 m-1 0 0],[0 0 0.5 1 1 0],'linewidth',1,'Color','k')
     else
         set(cax,'color','none','ycolor','k','xcolor','none');
         set(cax,'ytick',0:m-1,'yticklabel',num2cell(tick(1:end-1)),'xtick',[])
+        plot([0 0 0.5 1 1 0],[0 m-1 m-0.5 m-1 0 0],'linewidth',1,'Color','k')
     end
 end
-
+set(cax,'TickDir','none')
 end
