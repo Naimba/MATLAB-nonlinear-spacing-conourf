@@ -1,6 +1,6 @@
 function cax = mycolorbar(tick,color,mode,vnumber,bar_pos)
 % cax = MYCOLORBAR(tick,color,mode,vnumber,bar_pos)
-% 本函数提供了带尖端的colorbar
+% 本函数提供了带箭头的colorbar
 % -----------------------输入变量说明----------------------- 
 % mode 的可选项为'h'；'v'
 % 分别为水平和垂直
@@ -17,7 +17,8 @@ function cax = mycolorbar(tick,color,mode,vnumber,bar_pos)
 %
 % cax = MYCOLORBAR(-25:5:25,cm1,'v','<>');
 % 
-%  This fuction is by Yifan Liu, Academy of the Future Ocean, Ocean University of China.
+% This fuction is by Yifan Liu, Academy of the Future Ocean, Ocean University of China.
+% edited on 2024.5.17
 
 m = size(color,1);
 len_tick = length(tick);
