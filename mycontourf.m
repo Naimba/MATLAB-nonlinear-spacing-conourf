@@ -1,4 +1,4 @@
-function [M,c] = mycontourf(X,Y,Z,levels,cm,mode)
+function [M,c,Z1] = mycontourf(X,Y,Z,levels,cm,mode)
 % [M,c] = MYCONTOURF(X,Y,Z,levels,cm,mode)
 % 本函数将配合mycolorbar函数实现不等间距等值线填色
 % 注意：对于不等间距的格点插值是线性插值
@@ -12,13 +12,14 @@ function [M,c] = mycontourf(X,Y,Z,levels,cm,mode)
 % -----------------------输出变量说明----------------------- 
 % M：等高线矩阵；
 % c：等高线对象，显示等高线图后，使用c设置属性。
-%
+% Z1：变换后的数组
 % -----------------------函数调用示例----------------------- 
 % [M,c] = MYCONTOURF(X,Y,u',-25:5:25,cm,'m');
 % 
 % [M,c] = MYCONTOURF(X,Y,u',[-10 -8 -6 -4 -2 0 2 10 15 20 40],cm,'m');
 % 
-%  This fuction is made by Yifan Liu, Academy of the Future Ocean, Ocean University of China.
+% This fuction is made by Yifan Liu, Academy of the Future Ocean, Ocean University of China.
+% edited on 2024.5.21
 
 if nargin == 5
     mode = 'm';
@@ -30,6 +31,7 @@ end
 
 % 根据levels设置等间距的值（线性插值）
 n = length(levels);
+% [my,mx] = size(Z);
 Z1 = zeros(size(Z));
 
 % 线性插值
@@ -38,17 +40,19 @@ Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
 
 % 样条插值
 % Z1(Z>levels(1) & Z<=levels(n)) = interp1(levels(1:n),1:n,...
-%     Z(Z>levels(1) & Z<=levels(n)),'spline');
+    % Z(Z>levels(1) & Z<=levels(n)),'spline');
 
 % 设置边界值
 Z1(Z<=levels(1)) = 1;
 Z1(Z>levels(n)) = n-1;
+Z1(isnan(Z)) = nan;
 
 if isequal(mode,'m')
     [M,c] = m_contourf(X,Y,Z1,1:n,'LineStyle','none');
 else
     [M,c] = contourf(X,Y,Z1,1:n,'LineStyle','none');
 end
+
 colormap(cm)
 clim([1 n])
 
